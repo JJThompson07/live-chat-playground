@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+    match /databases/{database}/documents {
+//        match /messages/{document=**} -- match any file inside the messages collections
+//        match /messages/{messageId} -- match any document inside of messages but not any subCollections and
+//        captures the id of the document trying to get
+//        match /{document=**} -- any document
+        match /messages/{messageId} {
+            allow read, write: if request.auth != null;
+        }
+    }
+}
